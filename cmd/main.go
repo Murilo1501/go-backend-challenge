@@ -1,9 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
+func createWallet(resposne http.ResponseWriter, request *http.Request) {
+	fmt.Println("create wallet")
+}
+
 func main() {
-	http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("POST /wallets", createWallet)
+
+	http.ListenAndServe(":8080", mux)
 }
